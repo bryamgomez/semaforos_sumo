@@ -1,41 +1,36 @@
-# === Importación de librerías necesarias ===
 import os
 import torch
 import torch.nn as nn
 import joblib
 import traci
 import pandas as pd
-import matplotlib.pyplot as plt
-from collections import defaultdict
-import csv
 
-# === Configuración general ===
-CONFIG_FILE = "simulacion2.sumocfg"  # Archivo de configuración de SUMO
-INTERVALO_DECISION = 5  # Intervalo de tiempo para tomar decisiones en segundos
-DURACION_VERDE_MIN = 10  # Duración mínima de luz verde en segundos
-DURACION_VERDE_MAX = 50  # Duración máxima de luz verde en segundos
-CARPETA_RESULTADOS = "resultados_finales"  # Carpeta donde se guardarán los resultados
-ios.makedirs(CARPETA_RESULTADOS, exist_ok=True)  # Crea la carpeta si no existe
+CONFIG_FILE = "simulacion2.sumocfg"
+INTERVALO_DECISION = 5
+DURACION_VERDE_MIN = 10
+DURACION_VERDE_MAX = 50
+CARPETA_RESULTADOS = "resultados_finales"
+os.makedirs(CARPETA_RESULTADOS, exist_ok=True)
 
-# === Definición de la red neuronal convolucional para controlar semáforos ===
+# === CNN utilizada para todos los semáforos ===
 class SemaforoCNN(nn.Module):
     def __init__(self):
         super().__init__()
         self.conv = nn.Sequential(
-            nn.Conv1d(1, 16, kernel_size=2),  # Capa convolucional con 16 filtros
-            nn.ReLU(),  # Función de activación
-            nn.Flatten()  # Aplana la salida para conectarse con la capa totalmente conectada
+            nn.Conv1d(1, 16, kernel_size=2),
+            nn.ReLU(),
+            nn.Flatten()
         )
         self.fc = nn.Sequential(
-            nn.Linear(16 * 9, 64),  # Capa totalmente conectada con 64 neuronas
+            nn.Linear(16 * 9, 64),
             nn.ReLU(),
-            nn.Linear(64, 2)  # Capa de salida con 2 neuronas (2 posibles decisiones)
+            nn.Linear(64, 2)
         )
 
     def forward(self, x):
         return self.fc(self.conv(x))
 
-# === Definición de los semáforos y sus carriles asociados ===
+# === Configuración por semáforo ===
 SEMAFOROS = {
     "semaforo1": {
         "calles": {
@@ -81,42 +76,21 @@ SEMAFOROS = {
     }
 }
 
-# === Carga de modelos entrenados y escaladores por semáforo ===
+# === Cargar modelos y escaladores ===
 for s_id in SEMAFOROS:
-    modelo = SemaforoCNN()  # Se instancia la red neuronal
-    modelo_path = f"modelos/modelo_{s_id}.pt"  # Ruta al modelo
-    scaler_path = f"modelos/scaler_{s_id}.pkl"  # Ruta al escalador
-    modelo.load_state_dict(torch.load(modelo_path))  # Carga del modelo
-    modelo.eval()  # Se pone el modelo en modo evaluación
-    scaler = joblib.load(scaler_path)  # Carga del escalador
-    # Se guardan en el diccionario de cada semáforo
+    modelo = SemaforoCNN()
+    modelo_path = f"modelos/modelo_{s_id}.pt"
+    scaler_path = f"modelos/scaler_{s_id}.pkl"
+    modelo.load_state_dict(torch.load(modelo_path))
+    modelo.eval()
+    scaler = joblib.load(scaler_path)
     SEMAFOROS[s_id]["modelo"] = modelo
     SEMAFOROS[s_id]["scaler"] = scaler
-    SEMAFOROS[s_id]["fase"] = 0  # Fase inicial
-    SEMAFOROS[s_id]["t_ultima"] = 0  # Última vez que se cambió de estado
-    SEMAFOROS[s_id]["proximo"] = 0  # Tiempo para el próximo cambio
-    SEMAFOROS[s_id]["csv"] = []  # Datos recopilados
+    SEMAFOROS[s_id]["fase"] = 0
+    SEMAFOROS[s_id]["t_ultima"] = 0
+    SEMAFOROS[s_id]["proximo"] = 0
+    SEMAFOROS[s_id]["csv"] = []
 
-# === Variables para monitorear los semáforos ===
-semaphore_ids = list(SEMAFOROS.keys())
-monitor_data = {
-    sem_id: {
-        "tiempos_por_estado": defaultdict(float),
-        "tiempos_por_color": {"Rojo": 0.0, "Amarillo": 0.0, "Verde": 0.0},
-        "transiciones": []  # Transiciones de colores con tiempo y duración
-    }
-    for sem_id in semaphore_ids
-}
-
-# === Variables auxiliares ===
-prev_states = {sem_id: None for sem_id in semaphore_ids}  # Estado anterior de cada semáforo
-change_times = {sem_id: 0.0 for sem_id in semaphore_ids}  # Tiempo del último cambio
-
-# === Para el conteo total de vehículos ===
-time_steps = []
-vehicle_counts = []
-
-# === Recolección de datos por carril de cada calle ===
 def recolectar_datos(calles):
     datos_modelo = []
     datos_visuales = {}
@@ -140,3 +114,45 @@ def recolectar_datos(calles):
             "cola": total_cola
         }
     return datos_modelo, datos_visuales
+
+# === Ejecutar simulación
+traci.start(["sumo", "-c", CONFIG_FILE])
+print("🚦 Simulación iniciada con control inteligente...")
+
+while traci.simulation.getMinExpectedNumber() > 0:
+    traci.simulationStep()
+    tiempo = traci.simulation.getTime()
+
+    for sem_id, info in SEMAFOROS.items():
+        entrada, visual = recolectar_datos(info["calles"])
+        entrada_n = info["scaler"].transform([entrada])
+        entrada_tensor = torch.tensor(entrada_n, dtype=torch.float32).unsqueeze(1)
+        pred = info["modelo"](entrada_tensor).argmax().item()
+
+        if tiempo >= info["t_ultima"] + INTERVALO_DECISION and tiempo >= info["proximo"]:
+            if pred != info["fase"]:
+                traci.trafficlight.setPhase(sem_id, pred)
+                info["fase"] = pred
+                info["proximo"] = tiempo + max(DURACION_VERDE_MIN, min(DURACION_VERDE_MAX, INTERVALO_DECISION * 2))
+            info["t_ultima"] = tiempo
+
+        # Guardar datos
+        fila = {
+            "tiempo": tiempo,
+            "prediccion": pred,
+            "fase_aplicada": info["fase"]
+        }
+        for nombre, datos in visual.items():
+            fila[f"{nombre}_cola"] = datos["cola"]
+            fila[f"{nombre}_espera"] = datos["espera"]
+        info["csv"].append(fila)
+
+traci.close()
+
+# === Exportar CSVs
+for sem_id, info in SEMAFOROS.items():
+    df = pd.DataFrame(info["csv"])
+    nombre_archivo = os.path.join(CARPETA_RESULTADOS, f"{sem_id}_resultados_ia.csv")
+    df.to_csv(nombre_archivo, index=False)
+    print(f"✅ Datos exportados: {nombre_archivo}")
+

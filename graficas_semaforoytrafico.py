@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 from collections import defaultdict
 import csv
 
-# Configuración SUMO (sin --end)
+# Configuración SUMO
 sumo_config = [
     'sumo-gui',
-    '-c', 'C:/Users/braya/Desktop/Nueva carpeta (2)/configuracion.sumocfg',
+    '-c', 'C:/Users/braya/Desktop/proyecto vehiculares/simulacion2.sumocfg',
     '--step-length', '0.10',
     '--lateral-resolution', '0'
 ]

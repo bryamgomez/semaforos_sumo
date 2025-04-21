@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on 2025-04-08 20:27:59 by Eclipse SUMO netedit Version 1.22.0
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- VTypes -->
+    <vType id="t_0" vClass="private"/>
+    <vType id="t_1" vClass="bus"/>
+    <vType id="t_2" vClass="motorcycle"/>
+    <vType id="t_3" color="blue"/>
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+    
+
+    <!-- Hora Pico 6:00 a 8:00 -->
+    <!-- Sucre → sigue por Sucre -->
+    <flow id="f_0" type="t_2" begin="0.00" from="sucre0" to="sucre5" end="7200.00" period="50.00"/> <!-- 72 motos sube a 144-->
+    <flow id="f_1" type="DEFAULT_TAXITYPE" begin="0.00" from="sucre0" to="sucre5" end="7200.00" period="72.00"/> <!-- 50 taxis sube a 100-->
+    <flow id="f_2" type="t_3" begin="0.00" from="sucre0" to="sucre5" end="7200.00" period="36.00"/> <!-- 150 privado subido a 200 -->
+
+    <!-- Sucre → gira a Benigno Malo -->
+    <flow id="f_3" type="t_3" begin="0.00" from="sucre0" to="malo6" end="7200.00" period="80.00"/> <!-- 90 privado  -->
+    <flow id="f_4" type="t_2" begin="0.00" from="sucre0" to="malo6" end="7200.00" period="180.00"/> <!-- 30 motos aumento a 40-->
+    <flow id="f_5" type="DEFAULT_TAXITYPE" begin="0.00" from="sucre0" to="malo6" end="7200.00" period="180.00"/> <!-- 30 taxis aumento a 40 -->
+
+    <!-- Sucre → gira a Luis Cordero-->
+    <flow id="f_6" type="t_3" begin="0.00" from="sucre0" to="cordero0" end="7200.00" period="48.00"/> <!-- 90 privados aumento a 150 -->
+    <flow id="f_7" type="DEFAULT_TAXITYPE" begin="0.00" from="sucre0" to="cordero0" end="7200.00" period="120.00"/> <!-- 30 taxis aumento a 60 -->
+    <flow id="f_8" type="t_2" begin="0.00" from="sucre0" to="cordero0" end="7200.00" period="120.00"/> <!-- 30 motos aumento a 60 -->
+
+    <!-- Bolívar → sigue por Bolívar -->
+    <flow id="f_10" type="DEFAULT_TAXITYPE" begin="0.00" from="bolivar10" to="bolivar8" via="bolivar9" end="7200.00" period="144.00"/>
+    <flow id="f_11" type="t_2" begin="0.00" from="bolivar10" to="bolivar8" end="7200.00" period="144.00"/>
+    <flow id="f_9" type="t_3" begin="0.00" from="bolivar10" to="bolivar8" end="7200.00" period="48.00"/>
+
+    <!-- Bolívar → gira a Luis Cordero -->
+    <flow id="f_12" type="t_3" begin="0.00" from="bolivar10" to="cordero0" end="7200.00" period="80.00"/>
+    <flow id="f_13" type="DEFAULT_TAXITYPE" begin="0.00" from="bolivar10" to="cordero0" end="7200.00" period="120.00"/><!-- doble  -->
+    <flow id="f_14" type="t_2" begin="0.00" from="bolivar10" to="cordero0" end="7200.00" period="120.00"/> <!-- doble  -->
+
+    <!-- Bolívar → gira a Benigno Malo-->
+    <flow id="f_15" type="t_3" begin="0.00" from="bolivar10" to="malo6" end="7200.00" period="80.00"/>
+    <flow id="f_16" type="t_2" begin="0.00" from="bolivar10" to="malo6" end="7200.00" period="120.00"/><!-- doble -->
+    <flow id="f_17" type="DEFAULT_TAXITYPE" begin="0.00" from="bolivar10" to="malo6" end="7200.00" period="120.00"/> <!-- doble  -->
+
+    <!-- Benigno Malo → sigue recto (norte-sur)-->
+    <flow id="f_18" type="t_3" begin="0.00" from="malo1" to="malo6" end="7200.00" period="40.00"/> <!-- 120 privados aumento a 180  -->
+    <flow id="f_19" type="DEFAULT_TAXITYPE" begin="0.00" from="malo1" to="malo6" end="7200.00" period="144.00"/> <!-- 40 taxis aumento a 50 -->
+    <flow id="f_20" type="t_2" begin="0.00" from="malo1" to="malo6" end="7200.00" period="144.00"/>  <!-- 40 motos aumento a 50  -->
+
+    <!-- Luis Cordero → sigue recto (sur-norte) -->
+    <flow id="f_22" type="t_2" begin="0.00" from="cordero4" to="cordero0" end="7200.00" period="45.00"/>  <!-- 40 motos aumento a 160  -->
+    <flow id="f_37" type="DEFAULT_TAXITYPE" begin="0.00" from="cordero4" to="cordero0" end="7200.00" period="45.00"/> <!-- 40 taxis aumento a 160 -->
+    <flow id="f_38" type="t_3" begin="0.00" from="cordero4" to="cordero0" end="7200.00" period="48.00"/> <!-- 120 privados aumento a 150  -->
+    
+    <!-- Sucre → Luis Cordero → Bolívar (VUELTA EN U) -->
+    <flow id="f_25" type="t_3" begin="0.00" from="sucre0" to="bolivar8" end="7200.00" period="60.00"/> <!-- 90 privados aumento a 120  -->
+    <flow id="f_26" type="t_2" begin="0.00" from="sucre0" to="bolivar8" end="7200.00" period="120.00"/><!-- doble  -->
+    <flow id="f_27" type="DEFAULT_TAXITYPE" begin="0.00" from="sucre0" to="bolivar8" end="7200.00" period="120.00"/><!-- doble  -->
+
+    <!-- Luis Cordero → Bolívar → Benigno Malo (VUELTA EN U)-->
+    <flow id="f_28" type="t_3" begin="0.00" from="cordero4" to="malo6" end="7200.00" period="60.00"/> <!-- 90 privados aumento a 120  -->
+    <flow id="f_29" type="DEFAULT_TAXITYPE" begin="0.00" from="cordero4" to="malo6" end="7200.00" period="120.00"/><!-- doble  -->
+    <flow id="f_30" type="t_2" begin="0.00" from="cordero4" to="malo6" end="7200.00" period="120.00"/><!-- doble  -->
+    
+    <!-- Bolívar → Benigno Malo → Sucre (VUELTA EN U)-->
+    <flow id="f_31" type="t_3" begin="0.00" from="bolivar10" to="sucre5" end="7200.00" period="60.00"/> <!-- 90 privados aumento a 120  -->
+    <flow id="f_32" type="DEFAULT_TAXITYPE" begin="0.00" from="bolivar10" to="sucre5" end="7200.00" period="120.00"/><!-- doble  -->
+    <flow id="f_33" type="t_2" begin="0.00" from="bolivar10" to="sucre5" end="7200.00" period="120.00"/><!-- doble  -->
+
+    <!-- Benigno Malo → Sucre → Luis Cordero (VUELTA EN U)-->
+    <flow id="f_34" type="t_3" begin="0.00" from="malo1" to="cordero0" end="7200.00" period="80.00"/>
+    <flow id="f_35" type="DEFAULT_TAXITYPE" begin="0.00" from="malo1" to="cordero0" end="7200.00" period="120.00"/><!-- doble  -->
+    <flow id="f_36" type="t_2" begin="0.00" from="malo1" to="cordero0" end="7200.00" period="120.00"/><!-- doble  -->
+    <!-- General alrededor de 3234 vehiculos aprox-->
+    
+    <!-- HORA NORMAL DE 8:00 A 12:30-->
+    <flow id="f_0_extra" type="t_2" begin="7200.00" end="23400.00" from="sucre0" to="sucre5" period="181.91"/>
+    <flow id="f_1_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="sucre0" to="sucre5" period="261.95"/>
+    <flow id="f_2_extra" type="t_3" begin="7200.00" end="23400.00" from="sucre0" to="sucre5" period="130.98"/>
+
+    <flow id="f_3_extra" type="t_3" begin="7200.00" end="23400.00" from="sucre0" to="malo6" period="291.06"/>
+    <flow id="f_4_extra" type="t_2" begin="7200.00" end="23400.00" from="sucre0" to="malo6" period="654.88"/>
+    <flow id="f_5_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="sucre0" to="malo6" period="654.88"/>
+
+    <flow id="f_6_extra" type="t_3" begin="7200.00" end="23400.00" from="sucre0" to="cordero0" period="173.87"/>
+    <flow id="f_7_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="sucre0" to="cordero0" period="434.21"/>
+    <flow id="f_8_extra" type="t_2" begin="7200.00" end="23400.00" from="sucre0" to="cordero0" period="434.21"/>
+
+    <flow id="f_9_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="bolivar10" to="bolivar8" via="bolivar9" period="521.74"/>
+    <flow id="f_10_extra" type="t_2" begin="7200.00" end="23400.00" from="bolivar10" to="bolivar8" period="521.74"/>
+    <flow id="f_11_extra" type="t_3" begin="7200.00" end="23400.00" from="bolivar10" to="bolivar8" period="173.87"/>
+
+    <flow id="f_12_extra" type="t_3" begin="7200.00" end="23400.00" from="bolivar10" to="cordero0" period="291.06"/>
+    <flow id="f_13_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="bolivar10" to="cordero0" period="434.21"/>
+    <flow id="f_14_extra" type="t_2" begin="7200.00" end="23400.00" from="bolivar10" to="cordero0" period="434.21"/>
+    
+    <flow id="f_15_extra" type="t_3" begin="7200.00" end="23400.00" from="bolivar10" to="malo6" period="291.06"/>
+    <flow id="f_16_extra" type="t_2" begin="7200.00" end="23400.00" from="bolivar10" to="malo6" period="434.21"/>
+    <flow id="f_17_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="bolivar10" to="malo6" period="434.21"/>
+    
+    <flow id="f_18_extra" type="t_3" begin="7200.00" end="23400.00" from="malo1" to="malo6" period="145.53"/>
+    <flow id="f_19_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="malo1" to="malo6" period="521.74"/>
+    <flow id="f_20_extra" type="t_2" begin="7200.00" end="23400.00" from="malo1" to="malo6" period="521.74"/>
+    
+    <flow id="f_21_extra" type="t_2" begin="7200.00" end="23400.00" from="cordero4" to="cordero0" period="163.83"/>
+    <flow id="f_22_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="malo1" to="malo6" period="163.83"/>
+    <flow id="f_23_extra" type="t_3" begin="7200.00" end="23400.00" from="cordero4" to="cordero0" period="173.87"/>
+    
+    <flow id="f_24_extra" type="t_3" begin="7200.00" end="23400.00" from="sucre0" to="bolivar8" period="217.54"/>
+    <flow id="f_25_extra" type="t_2" begin="7200.00" end="23400.00" from="sucre0" to="bolivar8" period="434.21"/>
+    <flow id="f_26_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="sucre0" to="bolivar8" period="434.21"/>
+    
+    <flow id="f_27_extra" type="t_3" begin="7200.00" end="23400.00" from="cordero4" to="malo6" period="217.54"/>
+    <flow id="f_28_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="cordero4" to="malo6" period="434.21"/>
+    <flow id="f_29_extra" type="t_2" begin="7200.00" end="23400.00" from="cordero4" to="malo6" period="434.21"/>
+    
+    <flow id="f_30_extra" type="t_3" begin="7200.00" end="23400.00" from="bolivar10" to="sucre5" period="217.54"/>
+    <flow id="f_31_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="bolivar10" to="sucre5" period="434.21"/>
+    <flow id="f_32_extra" type="t_2" begin="7200.00" end="23400.00" from="bolivar10" to="sucre5" period="434.21"/>
+    
+    <flow id="f_33_extra" type="t_3" begin="7200.00" end="23400.00" from="malo1" to="cordero0" period="291.06"/>
+    <flow id="f_34_extra" type="DEFAULT_TAXITYPE" begin="7200.00" end="23400.00" from="malo1" to="cordero0" period="434.21"/>
+    <flow id="f_35_extra" type="t_2" begin="7200.00" end="23400.00" from="malo1" to="cordero0" period="434.21"/>
+
+    <!-- HORA PIco DE 12:30 A 13:30-->
+    <flow id="f_0_extra_3" type="t_2" begin="23400.00" end="27000.00" from="sucre0" to="sucre5" period="35.15"/>
+    <flow id="f_1_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="sucre0" to="sucre5" period="50.62"/>
+    <flow id="f_2_extra_3" type="t_3" begin="23400.00" end="27000.00" from="sucre0" to="sucre5" period="25.31"/>
+    
+    <flow id="f_3_extra_3" type="t_3" begin="23400.00" end="27000.00" from="sucre0" to="malo6" period="56.24"/>
+    <flow id="f_4_extra_3" type="t_2" begin="23400.00" end="27000.00" from="sucre0" to="malo6" period="126.55"/>
+    <flow id="f_5_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="sucre0" to="malo6" period="126.55"/>
+    
+    <flow id="f_6_extra_3" type="t_3" begin="23400.00" end="27000.00" from="sucre0" to="cordero0" period="33.97"/>
+    <flow id="f_7_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="sucre0" to="cordero0" period="84.92"/>
+    <flow id="f_8_extra_3" type="t_2" begin="23400.00" end="27000.00" from="sucre0" to="cordero0" period="84.92"/>
+    
+    <flow id="f_9_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="bolivar10" to="bolivar8" via="bolivar9" period="102.38"/>
+    <flow id="f_10_extra_3" type="t_2" begin="23400.00" end="27000.00" from="bolivar10" to="bolivar8" period="102.38"/>
+    <flow id="f_11_extra_3" type="t_3" begin="23400.00" end="27000.00" from="bolivar10" to="bolivar8" period="33.97"/>
+    
+    <flow id="f_12_extra_3" type="t_3" begin="23400.00" end="27000.00" from="bolivar10" to="cordero0" period="56.24"/>
+    <flow id="f_13_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="bolivar10" to="cordero0" period="84.92"/>
+    <flow id="f_14_extra_3" type="t_2" begin="23400.00" end="27000.00" from="bolivar10" to="cordero0" period="84.92"/>
+    
+    <flow id="f_15_extra_3" type="t_3" begin="23400.00" end="27000.00" from="bolivar10" to="malo6" period="56.24"/>
+    <flow id="f_16_extra_3" type="t_2" begin="23400.00" end="27000.00" from="bolivar10" to="malo6" period="84.92"/>
+    <flow id="f_17_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="bolivar10" to="malo6" period="84.92"/>
+    
+    <flow id="f_18_extra_3" type="t_3" begin="23400.00" end="27000.00" from="malo1" to="malo6" period="28.77"/>
+    <flow id="f_19_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="malo1" to="malo6" period="102.38"/>
+    <flow id="f_20_extra_3" type="t_2" begin="23400.00" end="27000.00" from="malo1" to="malo6" period="102.38"/>
+    
+    <flow id="f_21_extra_3" type="t_2" begin="23400.00" end="27000.00" from="cordero4" to="cordero0" period="32.19"/>
+    <flow id="f_22_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="malo1" to="malo6" period="32.19"/>
+    <flow id="f_23_extra_3" type="t_3" begin="23400.00" end="27000.00" from="cordero4" to="cordero0" period="33.97"/>
+    
+    <flow id="f_24_extra_3" type="t_3" begin="23400.00" end="27000.00" from="sucre0" to="bolivar8" period="42.48"/>
+    <flow id="f_25_extra_3" type="t_2" begin="23400.00" end="27000.00" from="sucre0" to="bolivar8" period="84.92"/>
+    <flow id="f_26_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="sucre0" to="bolivar8" period="84.92"/>
+    
+    <flow id="f_27_extra_3" type="t_3" begin="23400.00" end="27000.00" from="cordero4" to="malo6" period="42.48"/>
+    <flow id="f_28_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="cordero4" to="malo6" period="84.92"/>
+    <flow id="f_29_extra_3" type="t_2" begin="23400.00" end="27000.00" from="cordero4" to="malo6" period="84.92"/>
+    
+    <flow id="f_30_extra_3" type="t_3" begin="23400.00" end="27000.00" from="bolivar10" to="sucre5" period="42.48"/>
+    <flow id="f_31_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="bolivar10" to="sucre5" period="84.92"/>
+    <flow id="f_32_extra_3" type="t_2" begin="23400.00" end="27000.00" from="bolivar10" to="sucre5" period="84.92"/>
+    
+    <flow id="f_33_extra_3" type="t_3" begin="23400.00" end="27000.00" from="malo1" to="cordero0" period="56.24"/>
+    <flow id="f_34_extra_3" type="DEFAULT_TAXITYPE" begin="23400.00" end="27000.00" from="malo1" to="cordero0" period="84.92"/>
+    <flow id="f_35_extra_3" type="t_2" begin="23400.00" end="27000.00" from="malo1" to="cordero0" period="84.92"/>
+
+    <!-- HORA normal DE 13:30 A 17:30-->
+    <flow id="f_0_extra_4" type="t_2" begin="27000.00" end="41400.00" from="sucre0" to="sucre5" period="80.85"/>
+    <flow id="f_1_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="sucre0" to="sucre5" period="116.42"/>
+    <flow id="f_2_extra_4" type="t_3" begin="27000.00" end="41400.00" from="sucre0" to="sucre5" period="58.21"/>
+    <flow id="f_3_extra_4" type="t_3" begin="27000.00" end="41400.00" from="sucre0" to="malo6" period="129.36"/>
+    <flow id="f_4_extra_4" type="t_2" begin="27000.00" end="41400.00" from="sucre0" to="malo6" period="291.06"/>
+    <flow id="f_5_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="sucre0" to="malo6" period="291.06"/>
+    <flow id="f_6_extra_4" type="t_3" begin="27000.00" end="41400.00" from="sucre0" to="cordero0" period="77.36"/>
+    <flow id="f_7_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="sucre0" to="cordero0" period="193.15"/>
+    <flow id="f_8_extra_4" type="t_2" begin="27000.00" end="41400.00" from="sucre0" to="cordero0" period="193.15"/>
+    <flow id="f_9_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="bolivar10" to="bolivar8" via="bolivar9" period="233.84"/>
+    <flow id="f_10_extra_4" type="t_2" begin="27000.00" end="41400.00" from="bolivar10" to="bolivar8" period="233.84"/>
+    <flow id="f_11_extra_4" type="t_3" begin="27000.00" end="41400.00" from="bolivar10" to="bolivar8" period="77.36"/>
+    <flow id="f_12_extra_4" type="t_3" begin="27000.00" end="41400.00" from="bolivar10" to="cordero0" period="129.36"/>
+    <flow id="f_13_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="bolivar10" to="cordero0" period="193.15"/>
+    <flow id="f_14_extra_4" type="t_2" begin="27000.00" end="41400.00" from="bolivar10" to="cordero0" period="193.15"/>
+    <flow id="f_15_extra_4" type="t_3" begin="27000.00" end="41400.00" from="bolivar10" to="malo6" period="129.36"/>
+    <flow id="f_16_extra_4" type="t_2" begin="27000.00" end="41400.00" from="bolivar10" to="malo6" period="193.15"/>
+    <flow id="f_17_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="bolivar10" to="malo6" period="193.15"/>
+    <flow id="f_18_extra_4" type="t_3" begin="27000.00" end="41400.00" from="malo1" to="malo6" period="41.74"/>
+    <flow id="f_19_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="malo1" to="malo6" period="233.84"/>
+    <flow id="f_20_extra_4" type="t_2" begin="27000.00" end="41400.00" from="malo1" to="malo6" period="233.84"/>
+    <flow id="f_21_extra_4" type="t_2" begin="27000.00" end="41400.00" from="cordero4" to="cordero0" period="73.4"/>
+    <flow id="f_22_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="malo1" to="malo6" period="73.4"/>
+    <flow id="f_23_extra_4" type="t_3" begin="27000.00" end="41400.00" from="cordero4" to="cordero0" period="77.36"/>
+    <flow id="f_24_extra_4" type="t_3" begin="27000.00" end="41400.00" from="sucre0" to="bolivar8" period="96.87"/>
+    <flow id="f_25_extra_4" type="t_2" begin="27000.00" end="41400.00" from="sucre0" to="bolivar8" period="193.15"/>
+    <flow id="f_26_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="sucre0" to="bolivar8" period="193.15"/>
+    <flow id="f_27_extra_4" type="t_3" begin="27000.00" end="41400.00" from="cordero4" to="malo6" period="96.87"/>
+    <flow id="f_28_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="cordero4" to="malo6" period="193.15"/>
+    <flow id="f_29_extra_4" type="t_2" begin="27000.00" end="41400.00" from="cordero4" to="malo6" period="193.15"/>
+    <flow id="f_30_extra_4" type="t_3" begin="27000.00" end="41400.00" from="bolivar10" to="sucre5" period="96.87"/>
+    <flow id="f_31_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="bolivar10" to="sucre5" period="193.15"/>
+    <flow id="f_32_extra_4" type="t_2" begin="27000.00" end="41400.00" from="bolivar10" to="sucre5" period="193.15"/>
+    <flow id="f_33_extra_4" type="t_3" begin="27000.00" end="41400.00" from="malo1" to="cordero0" period="129.36"/>
+    <flow id="f_34_extra_4" type="DEFAULT_TAXITYPE" begin="27000.00" end="41400.00" from="malo1" to="cordero0" period="193.15"/>
+    <flow id="f_35_extra_4" type="t_2" begin="27000.00" end="41400.00" from="malo1" to="cordero0" period="193.15"/>
+
+    <!-- HORA pico DE 17:30 A 17:30-->
+
+    <flow id="f_0_extra_5" type="t_2" begin="41400.00" end="48600.00" from="sucre0" to="sucre5" period="41.46"/>
+    <flow id="f_1_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="sucre0" to="sucre5" period="59.7"/>
+    <flow id="f_2_extra_5" type="t_3" begin="41400.00" end="48600.00" from="sucre0" to="sucre5" period="29.85"/>
+    <flow id="f_3_extra_5" type="t_3" begin="41400.00" end="48600.00" from="sucre0" to="malo6" period="66.34"/>
+    <flow id="f_4_extra_5" type="t_2" begin="41400.00" end="48600.00" from="sucre0" to="malo6" period="149.26"/>
+    <flow id="f_5_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="sucre0" to="malo6" period="149.26"/>
+    <flow id="f_6_extra_5" type="t_3" begin="41400.00" end="48600.00" from="sucre0" to="cordero0" period="39.64"/>
+    <flow id="f_7_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="sucre0" to="cordero0" period="98.93"/>
+    <flow id="f_8_extra_5" type="t_2" begin="41400.00" end="48600.00" from="sucre0" to="cordero0" period="98.93"/>
+    <flow id="f_9_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="bolivar10" to="bolivar8" via="bolivar9" period="119.73"/>
+    <flow id="f_10_extra_5" type="t_2" begin="41400.00" end="48600.00" from="bolivar10" to="bolivar8" period="119.73"/>
+    <flow id="f_11_extra_5" type="t_3" begin="41400.00" end="48600.00" from="bolivar10" to="bolivar8" period="39.64"/>
+    <flow id="f_12_extra_5" type="t_3" begin="41400.00" end="48600.00" from="bolivar10" to="cordero0" period="66.34"/>
+    <flow id="f_13_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="bolivar10" to="cordero0" period="98.93"/>
+    <flow id="f_14_extra_5" type="t_2" begin="41400.00" end="48600.00" from="bolivar10" to="cordero0" period="98.93"/>
+    <flow id="f_15_extra_5" type="t_3" begin="41400.00" end="48600.00" from="bolivar10" to="malo6" period="66.34"/>
+    <flow id="f_16_extra_5" type="t_2" begin="41400.00" end="48600.00" from="bolivar10" to="malo6" period="98.93"/>
+    <flow id="f_17_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="bolivar10" to="malo6" period="98.93"/>
+    <flow id="f_18_extra_5" type="t_3" begin="41400.00" end="48600.00" from="malo1" to="malo6" period="21.45"/>
+    <flow id="f_19_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="malo1" to="malo6" period="119.73"/>
+    <flow id="f_20_extra_5" type="t_2" begin="41400.00" end="48600.00" from="malo1" to="malo6" period="119.73"/>
+    <flow id="f_21_extra_5" type="t_2" begin="41400.00" end="48600.00" from="cordero4" to="cordero0" period="37.55"/>
+    <flow id="f_22_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="malo1" to="malo6" period="37.55"/>
+    <flow id="f_23_extra_5" type="t_3" begin="41400.00" end="48600.00" from="cordero4" to="cordero0" period="39.64"/>
+    <flow id="f_24_extra_5" type="t_3" begin="41400.00" end="48600.00" from="sucre0" to="bolivar8" period="49.65"/>
+    <flow id="f_25_extra_5" type="t_2" begin="41400.00" end="48600.00" from="sucre0" to="bolivar8" period="98.93"/>
+    <flow id="f_26_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="sucre0" to="bolivar8" period="98.93"/>
+    <flow id="f_27_extra_5" type="t_3" begin="41400.00" end="48600.00" from="cordero4" to="malo6" period="49.65"/>
+    <flow id="f_28_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="cordero4" to="malo6" period="98.93"/>
+    <flow id="f_29_extra_5" type="t_2" begin="41400.00" end="48600.00" from="cordero4" to="malo6" period="98.93"/>
+    <flow id="f_30_extra_5" type="t_3" begin="41400.00" end="48600.00" from="bolivar10" to="sucre5" period="49.65"/>
+    <flow id="f_31_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="bolivar10" to="sucre5" period="98.93"/>
+    <flow id="f_32_extra_5" type="t_2" begin="41400.00" end="48600.00" from="bolivar10" to="sucre5" period="98.93"/>
+    <flow id="f_33_extra_5" type="t_3" begin="41400.00" end="48600.00" from="malo1" to="cordero0" period="66.34"/>
+    <flow id="f_34_extra_5" type="DEFAULT_TAXITYPE" begin="41400.00" end="48600.00" from="malo1" to="cordero0" period="98.93"/>
+    <flow id="f_35_extra_5" type="t_2" begin="41400.00" end="48600.00" from="malo1" to="cordero0" period="98.93"/>
+
+</routes>
